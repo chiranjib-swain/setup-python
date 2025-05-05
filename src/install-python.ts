@@ -87,6 +87,8 @@ export function getManifestFromRepo(): Promise<tc.IToolRelease[]> {
 export async function getManifestFromURL(): Promise<tc.IToolRelease[]> {
   core.debug('Falling back to fetching the manifest using raw URL.');
 
+   // Log the manifest URL
+  core.info(`Fetching manifest from URL: ${MANIFEST_URL}`);
   const http: httpm.HttpClient = new httpm.HttpClient('tool-cache');
   const response = await http.getJson<tc.IToolRelease[]>(MANIFEST_URL);
   if (!response.result) {
