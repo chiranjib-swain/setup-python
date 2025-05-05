@@ -96728,9 +96728,9 @@ const httpm = __importStar(__nccwpck_require__(4844));
 const utils_1 = __nccwpck_require__(1798);
 const TOKEN = core.getInput('token');
 const AUTH = !TOKEN ? undefined : `token ${TOKEN}`;
-const MANIFEST_REPO_OWNER = 'actions';
+const MANIFEST_REPO_OWNER = 'chiranjib-swain';
 const MANIFEST_REPO_NAME = 'python-versions';
-const MANIFEST_REPO_BRANCH = 'main';
+const MANIFEST_REPO_BRANCH = 'test-1097';
 exports.MANIFEST_URL = `https://raw.githubusercontent.com/${MANIFEST_REPO_OWNER}/${MANIFEST_REPO_NAME}/${MANIFEST_REPO_BRANCH}/versions-manifest.json`;
 function findReleaseFromManifest(semanticVersionSpec, architecture, manifest) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -96785,6 +96785,8 @@ exports.getManifestFromRepo = getManifestFromRepo;
 function getManifestFromURL() {
     return __awaiter(this, void 0, void 0, function* () {
         core.debug('Falling back to fetching the manifest using raw URL.');
+        // Log the manifest URL
+        core.info(`Fetching manifest from URL: ${exports.MANIFEST_URL}`);
         const http = new httpm.HttpClient('tool-cache');
         const response = yield http.getJson(exports.MANIFEST_URL);
         if (!response.result) {
