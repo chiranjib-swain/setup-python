@@ -37,10 +37,10 @@ This implementation keeps PR 420's frame and context-line approach, narrows the 
 
 ### Pull request 420
 
-- [Pull request 420 on Python 3.10](https://github.com/chiranjib-swain/test-setup-python/actions/runs/31475973490)
-- [Pull request 420 on Python 3.14](https://github.com/chiranjib-swain/test-setup-python/actions/runs/31476024765)
+- [Pull request 420 on Python 3.10](https://github.com/chiranjib-swain/test-setup-python/actions/runs/31574512952)
+- [Pull request 420 on Python 3.14](https://github.com/chiranjib-swain/test-setup-python/actions/runs/31574516135)
 
-Both workflows execute `eric-wieser/setup-python@patch-1`.
+Both workflows checked out and validated the single matcher at `eric-wieser/setup-python@patch-1` commit `82009b3bde52ba09eae338d59adb1c06ac50c997`.
 
 | Case | Python 3.10 | Python 3.14 |
 | --- | --- | --- |
@@ -51,7 +51,7 @@ Both workflows execute `eric-wieser/setup-python@patch-1`.
 | Windows path | Correct annotation | Correct annotation |
 | Traceback-shaped ordinary output | Incorrectly annotated | Incorrectly annotated |
 
-The runs are intentionally red because fixtures raise exceptions. Their matcher-count validation targets this update's two-matcher configuration, so runtime annotations are the relevant PR 420 evidence.
+The validation jobs passed. The runs are intentionally red because the runtime fixtures raise exceptions.
 
 ### This update
 
