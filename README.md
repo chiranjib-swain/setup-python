@@ -82,7 +82,7 @@ Using the `architecture` input, it is possible to specify the required Python or
 
 ## Problem matchers
 
-The action registers problem matchers that turn uncaught Python exceptions into file and line annotations. Standard traceback formats are supported, including the fine-grained error locations emitted by Python 3.11 and later.
+The action registers problem matchers that turn uncaught Python exceptions into file and line annotations. Standard Python traceback formats are supported, including the fine-grained error locations emitted by Python 3.11 and later.
 
 Tracebacks with custom prefixes or indentation are not currently supported.
 

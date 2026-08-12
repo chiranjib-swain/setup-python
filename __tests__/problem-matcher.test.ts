@@ -215,6 +215,24 @@ describe('Python problem matcher', () => {
     ).toBe(expectedMessage);
   });
 
+  it('matches an exception without a message', () => {
+    expect(
+      findProblems([
+        'Traceback (most recent call last):',
+        '  File "tests/no_message.py", line 1, in <module>',
+        '    raise ValueError',
+        'ValueError'
+      ])
+    ).toEqual([
+      {
+        owner: 'python',
+        file: 'tests/no_message.py',
+        line: '1',
+        message: 'ValueError'
+      }
+    ]);
+  });
+
   it('captures Windows paths', () => {
     expect(
       findProblems([
