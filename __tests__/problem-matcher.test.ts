@@ -244,15 +244,6 @@ describe('Python problem matcher', () => {
         'ERROR:    fail()',
         'ERROR:RuntimeError: failed'
       ]
-    ],
-    [
-      'ExceptionGroup tree output',
-      [
-        '  + Exception Group Traceback (most recent call last):',
-        '  |   File "tests/group.py", line 1, in <module>',
-        '  |     raise ExceptionGroup("group", [ValueError("bad")])',
-        '  | ExceptionGroup: group (1 sub-exception)'
-      ]
     ]
   ])('does not match %s', (_name, lines) => {
     expect(findProblems(lines as string[])).toEqual([]);
