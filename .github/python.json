@@ -12,10 +12,10 @@
                     "regexp": "^    .*$"
                 },
                 {
-                    "regexp": "^    [ ~^]+$"
+                    "regexp": "^    [ ~^]*[~^][ ~^]*$"
                 },
                 {
-                    "regexp": "^((?:[A-Za-z_][A-Za-z0-9_]*\\.)*[A-Za-z_][A-Za-z0-9_]*(?::.*)?)\\s*$",
+                    "regexp": "^((?:[A-Za-z_][A-Za-z0-9_]*\\.)*(?:(?:[A-Za-z_][A-Za-z0-9_]*(?:Error|Exception|Warning)|Exception|Warning|BaseException|KeyboardInterrupt|GeneratorExit|StopIteration|StopAsyncIteration)(?::.*)?|[A-Za-z_][A-Za-z0-9_]*:.*))\\s*$",
                     "message": 1
                 }
             ]
@@ -32,7 +32,7 @@
                     "regexp": "^    .*$"
                 },
                 {
-                    "regexp": "^((?:[A-Za-z_][A-Za-z0-9_]*\\.)*[A-Za-z_][A-Za-z0-9_]*(?::.*)?)\\s*$",
+                    "regexp": "^((?:[A-Za-z_][A-Za-z0-9_]*\\.)*(?:(?:[A-Za-z_][A-Za-z0-9_]*(?:Error|Exception|Warning)|Exception|Warning|BaseException|KeyboardInterrupt|GeneratorExit|StopIteration|StopAsyncIteration)(?::.*)?|[A-Za-z_][A-Za-z0-9_]*:.*))\\s*$",
                     "message": 1
                 }
             ]

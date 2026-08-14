@@ -11,7 +11,7 @@ This change improves the Python problem matcher so standard traceback output is 
 - Replace the narrow matcher that requires a source line shaped like `raise Exception('message')`.
 - Add `python` for standard three-line traceback endings.
 - Add `python-range` for Python 3.11+ tracebacks containing a `^`/`~` location line.
-- Capture the complete exception line, including built-in, qualified, and message-less exceptions.
+- Capture complete exception lines, including qualified custom exceptions with messages and common message-less builtins.
 - Require an exception-shaped final line to reject traceback-like ordinary output.
 
 The two layouts need unique owners because registering another matcher with the same owner replaces the existing matcher.
@@ -29,7 +29,7 @@ PR 420 uses one three-line matcher and accepts any final line that is not anothe
 | `SyntaxError` caret lines | No annotation | Captures the caret as the message | Captures the complete `SyntaxError` message |
 | Traceback-shaped ordinary output | Usually not matched | Produces a false positive | Rejected |
 | Matcher layouts | One narrow layout | One broad three-line layout | Separate three-line and four-line layouts |
-| Automated matcher tests | None | None | 24 contract cases |
+| Automated matcher tests | None | None | 36 contract cases |
 
 This implementation keeps PR 420's frame and context-line approach, narrows the final line to an exception-shaped identifier, and uses a separate matcher for the four-line layout.
 
@@ -73,13 +73,13 @@ These workflows are also intentionally red because the fixtures raise uncaught e
 
 ## Tests and documentation
 
-`__tests__/problem-matcher.test.ts` loads `.github/python.json` and simulates consecutive multiline matching. Its 24 cases cover classic and modern tracebacks, 13 common exceptions, `SyntaxError`, nested and chained errors, qualified and message-less exceptions, Windows paths, and negative cases.
+`__tests__/problem-matcher.test.ts` loads `.github/python.json` and simulates consecutive multiline matching. Its 36 cases cover classic and modern tracebacks, 13 common exceptions, `SyntaxError`, nested and chained errors, qualified exceptions with messages, message-less exceptions, suffix boundaries, Windows paths, and negative cases.
 
 The README documents standard traceback support, Python 3.11+ fine-grained locations, and the custom prefix/indentation limitation.
 
 Validation completed:
 
-- 234 Jest tests passed across 11 suites.
+- 246 Jest tests passed across 11 suites.
 - ESLint and Prettier passed.
 - Both production `ncc` bundles built without tracked changes.
 

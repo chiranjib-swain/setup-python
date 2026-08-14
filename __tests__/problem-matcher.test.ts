@@ -233,6 +233,45 @@ describe('Python problem matcher', () => {
     ]);
   });
 
+  it.each(['BuildError', 'CustomException', 'UserWarning', 'Warning'])(
+    'matches a custom %s without a message',
+    message => {
+      expect(
+        findProblems([
+          'Traceback (most recent call last):',
+          '  File "tests/custom.py", line 4, in <module>',
+          `    raise ${message}`,
+          message
+        ])
+      ).toEqual([
+        {
+          owner: 'python',
+          file: 'tests/custom.py',
+          line: '4',
+          message
+        }
+      ]);
+    }
+  );
+
+  it.each([
+    'Done',
+    'Summary',
+    'Success',
+    'Completed',
+    'ErrorMessage',
+    'WarningMessage',
+    'ExceptionDetails'
+  ])('does not match ordinary output ending in %s', message => {
+    expect(
+      findProblems([
+        '  File "tests/lookalike.py", line 4, in report',
+        '    informational context',
+        message
+      ])
+    ).toEqual([]);
+  });
+
   it('captures Windows paths', () => {
     expect(
       findProblems([
@@ -253,6 +292,15 @@ describe('Python problem matcher', () => {
         '  File "tests/lookalike.py", line 4, in report',
         '    informational context',
         'not actually a Python exception'
+      ]
+    ],
+    [
+      'a whitespace-only range indicator',
+      [
+        '  File "tests/example.py", line 4, in <module>',
+        '    fail()',
+        '         ',
+        'RuntimeError: failed'
       ]
     ],
     [
