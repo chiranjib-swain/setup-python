@@ -80,6 +80,12 @@ The `python-version` input supports the [Semantic Versioning Specification](http
 
 Using the `architecture` input, it is possible to specify the required Python or PyPy interpreter architecture: `x86`, `x64`, or `arm64`. If the input is not specified, the architecture defaults to the host OS architecture.
 
+## Problem matchers
+
+The action registers problem matchers that turn uncaught Python exceptions into file and line annotations. Standard Python traceback formats are supported, including the fine-grained error locations emitted by Python 3.11 and later.
+
+Tracebacks with custom prefixes or indentation are not currently supported.
+
 ## Caching packages dependencies
 
 The action has built-in functionality for caching and restoring dependencies. It uses [toolkit/cache](https://github.com/actions/toolkit/tree/main/packages/cache) under the hood for caching dependencies but requires less configuration settings. Supported package managers are `pip`, `pipenv` and `poetry`. The `cache` input is optional, and caching is turned off by default.

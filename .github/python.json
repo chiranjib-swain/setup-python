@@ -1,16 +1,39 @@
 {
     "problemMatcher": [
         {
-            "owner": "python",
+            "owner": "python-range",
             "pattern": [
                 {
-                    "regexp": "^\\s*File\\s\\\"(.*)\\\",\\sline\\s(\\d+),\\sin\\s(.*)$",
+                    "regexp": "^  File \"(.*)\", line (\\d+).*",
                     "file": 1,
                     "line": 2
                 },
                 {
-                    "regexp": "^\\s*raise\\s(.*)\\(\\'(.*)\\'\\)$",
-                    "message": 2
+                    "regexp": "^    .*$"
+                },
+                {
+                    "regexp": "^    [ ~^]*[~^][ ~^]*$"
+                },
+                {
+                    "regexp": "^((?:[A-Za-z_][A-Za-z0-9_]*\\.)*(?:(?:[A-Za-z_][A-Za-z0-9_]*(?:Error|Exception|Warning)|Exception|Warning|BaseException|KeyboardInterrupt|GeneratorExit|StopIteration|StopAsyncIteration)(?::.*)?|[A-Za-z_][A-Za-z0-9_]*:.*))\\s*$",
+                    "message": 1
+                }
+            ]
+        },
+        {
+            "owner": "python",
+            "pattern": [
+                {
+                    "regexp": "^  File \"(.*)\", line (\\d+).*",
+                    "file": 1,
+                    "line": 2
+                },
+                {
+                    "regexp": "^    .*$"
+                },
+                {
+                    "regexp": "^((?:[A-Za-z_][A-Za-z0-9_]*\\.)*(?:(?:[A-Za-z_][A-Za-z0-9_]*(?:Error|Exception|Warning)|Exception|Warning|BaseException|KeyboardInterrupt|GeneratorExit|StopIteration|StopAsyncIteration)(?::.*)?|[A-Za-z_][A-Za-z0-9_]*:.*))\\s*$",
+                    "message": 1
                 }
             ]
         }
