@@ -71,6 +71,19 @@ Both runs confirmed:
 
 These workflows are also intentionally red because the fixtures raise uncaught exceptions; the matcher validation jobs passed.
 
+### Built-in exception coverage
+
+The external workflow at commit `a7c432a3cdd9350e261fa7babbc1e5523c0ca8eb` tested the matcher from commit `7d4b96b27380874c231b1bff382518ad060ca769` against 45 Python built-in exceptions on both supported traceback layouts:
+
+- [Python 3.10, batch A](https://github.com/chiranjib-swain/test-setup-python/actions/runs/31795761673)
+- [Python 3.10, batch B](https://github.com/chiranjib-swain/test-setup-python/actions/runs/31795764222)
+- [Python 3.14, batch A](https://github.com/chiranjib-swain/test-setup-python/actions/runs/31795767221)
+- [Python 3.14, batch B](https://github.com/chiranjib-swain/test-setup-python/actions/runs/31795769751)
+
+All four matcher validation jobs passed. Each of the 90 supported exception jobs produced exactly one source annotation with the expected exception name. `IOError` correctly appeared as `OSError`, its runtime alias.
+
+The boundary fixtures also behaved as expected: ordinary uncaught `SystemExit` produced no standard traceback annotation, and Python 3.14's pipe-prefixed `BaseExceptionGroup` output produced no standard source annotation. The workflows are intentionally red because all runtime and boundary fixtures raise uncaught exceptions.
+
 ## Tests and documentation
 
 `__tests__/problem-matcher.test.ts` loads `.github/python.json` and simulates consecutive multiline matching. Its 36 cases cover classic and modern tracebacks, 13 common exceptions, `SyntaxError`, nested and chained errors, qualified exceptions with messages, message-less exceptions, suffix boundaries, Windows paths, and negative cases.
